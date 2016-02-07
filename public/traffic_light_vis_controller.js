@@ -1,9 +1,8 @@
 var module = require('ui/modules').get('traffic_light_vis');
 
-abcde-;
 
 module.controller('TrafficLightVisController', function ($scope, Private) {
-	var tabifyAggResponse = Private(require('components/agg_response/tabify/tabify'));
+	var tabifyAggResponse = Private(require('ui/agg_response/tabify/tabify'));
 
 	var metrics = $scope.metrics = [];
 
