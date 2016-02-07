@@ -2,6 +2,7 @@
     <div class="metric-container" ng-repeat="metric in metrics">
         <!-- height = width * 2.68 -->
         <!-- light width 0.68% of traffic light width -->
+		<div>{{vis.params.title}}</div>
         <div class="traffic-light-container" ng-style="{'width': vis.params.width+'px', 'height': (2.68 * vis.params.width)+'px' }">
             <div class="traffic-light">
                 <div class="light red" ng-class="{'on': (!vis.params.invertScale && metric.value <= vis.params.redThreshold) || (vis.params.invertScale && metric.value >= vis.params.redThreshold) }"></div>
