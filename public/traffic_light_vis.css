@@ -40,6 +40,10 @@
   width: 100%;
   position: relative;
 }
+.traffic-light-line
+{
+	width:100%;
+}
 .traffic-light-vis .traffic-light-container {
   margin: 0 auto;
 }

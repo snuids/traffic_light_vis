@@ -1,16 +1,19 @@
 <div ng-controller="TrafficLightVisController" class="traffic-light-vis">
-    <div class="metric-container" ng-repeat="metric in metrics">
-        <!-- height = width * 2.68 -->
-        <!-- light width 0.68% of traffic light width -->
-		<div>{{vis.params.title}}</div>
-        <div class="traffic-light-container" ng-style="{'width': vis.params.width+'px', 'height': (2.68 * vis.params.width)+'px' }">
-            <div class="traffic-light">
-                <div class="light red" ng-class="{'on': (!vis.params.invertScale && metric.value <= vis.params.redThreshold) || (vis.params.invertScale && metric.value >= vis.params.redThreshold) }"></div>
-                <div class="light yellow" ng-class="{'on': (!vis.params.invertScale && metric.value > vis.params.redThreshold && metric.value < vis.params.greenThreshold) || (vis.params.invertScale && metric.value < vis.params.redThreshold && metric.value > vis.params.greenThreshold) }"></div>
-                <div class="light green" ng-class="{'on': (!vis.params.invertScale && metric.value >= vis.params.greenThreshold) || (vis.params.invertScale && metric.value <= vis.params.greenThreshold) }"></div>
-            </div>
-        </div>
-        <div>{{metric.label}} ({{metric.value}})</div>
-        <!--div class="copyright" style="margin:0 0 4px 4px;font-size:11px;position:absolute;bottom:0;left:0;">Developed by <a href="https://logz.io" target="_blank">Logz.io</a></div-->
-    </div>
+	<div class="traffic-light-vis" ng-repeat="line in lines"> 
+	    <div ng-repeat="metric in line" ng-style="{'width':'50px !important;'}">
+	        <div class="traffic-light-container" ng-style="{'width': vis.params.width+'px', 'height': (2.68 * vis.params.width)+'px' }">
+	            <div class="traffic-light">
+	                <div class="light red" ng-class="{'on': 
+						(!vis.params.invertScale && ((metric.value <= vis.params.redThreshold) || (metric.value >= vis.params.max))) 
+						|| (vis.params.invertScale && metric.value >= vis.params.redThreshold) }">
+					</div>
+	                <div class="light yellow" ng-class="{'on': (!vis.params.invertScale && metric.value > vis.params.redThreshold && metric.value < vis.params.greenThreshold) || (vis.params.invertScale && metric.value < vis.params.redThreshold && metric.value > vis.params.greenThreshold) }"></div>
+	                <div class="light green" ng-class="{'on': 
+					(!vis.params.invertScale && metric.value >= vis.params.greenThreshold && metric.value < vis.params.max) 
+					|| (vis.params.invertScale && metric.value <= vis.params.greenThreshold) }"></div>
+	            </div>
+	        </div>
+	        <div>{{metric.label}} ({{metric.value}})</div>
+	    </div>
+	</div>
 </div>

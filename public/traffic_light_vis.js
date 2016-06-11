@@ -18,10 +18,12 @@ function TrafficLightProvider(Private) {
 	  template: require('plugins/traffic_light_vis/traffic_light_vis.html'),
 	  params: {
 	    defaults: {
+		  max:1000000,
 	      width: 50,
 	      redThreshold: 20,
 	      greenThreshold: 80,
-	      invertScale: false
+	      invertScale: false,
+			numberOfLights:10
 	    },
 	    editor: require('plugins/traffic_light_vis/traffic_light_vis_params.html')
 	  },
@@ -34,7 +36,15 @@ function TrafficLightProvider(Private) {
 	      defaults: [
 	        { type: 'count', schema: 'metric' }
 	      ]
-	    }
+	    },
+		{
+		        group: 'buckets',
+		        name: 'split',
+		        title: 'Split Chart',
+		        min: 0,
+		        max: 1,
+		        aggFilter: '!geohash_grid'
+		      }
 	  ])
 	});
 };
