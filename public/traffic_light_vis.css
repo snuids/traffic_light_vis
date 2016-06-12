@@ -40,9 +40,9 @@
   width: 100%;
   position: relative;
 }
-.traffic-light-line
+.traffic-light-legend
 {
-	width:100%;
+	text-align:center;
 }
 .traffic-light-vis .traffic-light-container {
   margin: 0 auto;
