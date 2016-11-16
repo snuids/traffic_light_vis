@@ -7,25 +7,32 @@ module.controller('TrafficLightVisController', function ($scope, Private) {
 //	var metrics = $scope.metrics = [];
 	var lines = $scope.lines = [];
 
+	$scope.percentperlight=100;
 
+  console.log("PercentPerLight="+$scope.percentperlight);
 
-	$scope.processTableGroups = function (tableGroups) 
+	$scope.processTableGroups = function (tableGroups)
 	{
-		console.log($scope);
+		if($scope.vis.params.numberOfLights>0)
+		{
+			$scope.percentperlight=100/$scope.vis.params.numberOfLights;
+			console.log("Setting width traffic light width to:"+$scope.percentperlight);
+		}
+		
 		var metrics=[];
 		var i=0;
-	  	tableGroups.tables.forEach(function (table) 
+	  	tableGroups.tables.forEach(function (table)
 		{
 			if((i%$scope.vis.params.numberOfLights)==0)
 			{
-				metrics=[];				
-				lines.push(metrics);								
+				metrics=[];
+				lines.push(metrics);
 			}
-			
-			
+
+
 			if(table.tables == undefined)
 			{
-		    	table.columns.forEach(function (column, i) 
+		    	table.columns.forEach(function (column, i)
 				{
 		      	  	metrics.push({
 		        		label: column.title,
@@ -35,15 +42,15 @@ module.controller('TrafficLightVisController', function ($scope, Private) {
 			}
 			else
 			{
-			  	table.tables.forEach(function (table2) 
+			  	table.tables.forEach(function (table2)
 				{
-			    	table2.columns.forEach(function (column, i) 
+			    	table2.columns.forEach(function (column, i)
 					{
 			      	  	metrics.push({
 			        		label: table.key,
 			        		value: table2.rows[0][i]
 			      	  	});
-			    	});		
+			    	});
 				});
 			}
 			i++;
